@@ -1,0 +1,19 @@
+name: Build & Test
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v1
+    - name: Build & Test
+      run: |
+        npm install
+        npm run build --if-present
+        npm test
+      env:
+        CI: true
