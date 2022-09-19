@@ -1,5 +1,5 @@
 {
-    "name": "@ngageoint/color-js",
+    "name": "@ngageoint/grid-js",
     "version": "1.0.0",
     "displayName": "Grid Javascript",
     "description": "Grid Javascript",
@@ -7,6 +7,7 @@
         "NGA",
         "Grid"
     ],
+    "license": "MIT",
     "repository": {
         "type": "git",
         "url": "https://github.com/ngageoint/grid-js.git"
@@ -25,6 +26,7 @@
         "npm": ">= 8.x"
     },
     "devDependencies": {
+        "@ngageoint/color-js": "^1.0.0",
         "@types/chai": "^4.3.3",
         "@types/mocha": "9.1.1",
         "chai": "4.3.6",
@@ -36,13 +38,15 @@
         "typescript": "^4.8.3"
     },
     "scripts": {
-        "clean": "rm -rf dist test-dist",
+        "clean": "rm -rf dist; rm -rf test-dist; rm -rf .test_run",
         "test:compile": "tsc -b test",
         "test:copy_node_modules": "cpy \"node_modules/**/*\" ../test-dist/",
         "test:run": "mocha --config .mocharc.js",
         "test:build": "npm-run-all build test:compile test:copy_node_modules",
         "test": "npm-run-all test:build test:run",
         "report": "nyc report",
+        "coverage": "nyc npm run test:run",
+        "coveralls": "nyc report --reporter=text-lcov | coveralls",
         "build": "npm run clean && tsc"
     },
     "files": [
