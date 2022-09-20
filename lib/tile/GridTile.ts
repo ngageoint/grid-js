@@ -1,6 +1,7 @@
 import { Bounds } from "../features/Bounds";
 import { Point } from "../features/Point";
 import { Unit } from "../features/Unit";
+import { GridUtils } from "../GridUtils";
 import { Pixel } from "./Pixel";
 
 /**
@@ -142,7 +143,7 @@ export class GridTile {
      * @return pixel
      */
     public getPixel(point: Point): Pixel {
-        return GridUtils.getPixel(this.width, this.height, this.bounds, point);
+        return GridUtils.getPixel(this.width, this.height, this.bounds!, point);
     }
 
     /**
@@ -153,7 +154,7 @@ export class GridTile {
      * @return x pixel
      */
     public getXPixel(longitude: number): number {
-        return GridUtils.getXPixel(this.width, this.bounds, longitude);
+        return GridUtils.getXPixel(this.width, this.bounds!, longitude);
     }
 
     /**
@@ -164,7 +165,7 @@ export class GridTile {
      * @return y pixel
      */
     public getYPixel(latitude: number): number {
-        return GridUtils.getYPixel(this.height, this.bounds, latitude);
+        return GridUtils.getYPixel(this.height, this.bounds!, latitude);
     }
 
 }

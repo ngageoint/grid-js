@@ -1,5 +1,6 @@
 import { Point as MilPoint } from "@ngageoint/simple-features-js"
 import { GridUtils } from "../GridUtils";
+import { GridTile } from "../tile/GridTile";
 import { Pixel } from "../tile/Pixel";
 import { Bounds } from "./Bounds";
 import { Unit } from "./Unit";
@@ -272,7 +273,7 @@ export class Point extends MilPoint {
 	 * @return pixel
 	 */
 	public getPixelFromTile(tile: GridTile): Pixel {
-		return this.getPixel(tile.getWidth(), tile.getHeight(), tile.getBounds());
+		return this.getPixel(tile.getWidth(), tile.getHeight(), tile.getBounds()!);
 	}
 
 	/**
