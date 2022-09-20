@@ -184,19 +184,19 @@ export class GridUtils {
      *            desired unit
      * @return point in unit
      */
-    public static toUnit(longitude: number, latitude: number, unit: Unit): Point {
-        let point: MilPoint | undefined = undefined;
+    public static toUnitOpposite(longitude: number, latitude: number, unit: Unit): Point {
+        let point: MilPoint;
         switch (unit) {
-            case DEGREE:
+            case Unit.DEGREE:
                 point = GeometryUtils.metersToDegrees(longitude, latitude);
                 break;
-            case METER:
+            case Unit.METER:
                 point = GeometryUtils.degreesToMeters(longitude, latitude);
                 break;
             default:
                 throw new Error("Unsupported unit: " + unit);
         }
-        return Point.point(point, unit);
+        return Point.pointFromPoint(point, unit);
     }
 
     /**
@@ -254,7 +254,7 @@ export class GridUtils {
      *            second line
      * @return intersection point or null if no intersection
      */
-    public static intersection(line1: Line, line2: Line): Point {
+    public static lineIntersection(line1: Line, line2: Line): Point | undefined {
         return this.intersection(line1.getPoint1(), line1.getPoint2(),
             line2.getPoint1(), line2.getPoint2());
     }
@@ -273,17 +273,17 @@ export class GridUtils {
      * @return intersection point or null if no intersection
      */
     public static intersection(line1Point1: Point, line1Point2: Point,
-        line2Point1: Point, line2Point2: Point): Point {
+        line2Point1: Point, line2Point2: Point): Point | undefined {
 
-        let intersection = null;
+        let intersection: Point | undefined = undefined;
 
         let point: MilPoint = GeometryUtils.intersection(
             line1Point1.toMeters(), line1Point2.toMeters(),
             line2Point1.toMeters(), line2Point2.toMeters());
 
         if (point != null) {
-            intersection = Point.point(point, Unit.METER)
-                .toUnit(line1Point1.getUnit());
+            intersection = Point.pointFromPoint(point, Unit.METER)
+                .toUnit(line1Point1.getUnit()!);
         }
 
         return intersection;

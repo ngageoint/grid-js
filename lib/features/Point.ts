@@ -1,4 +1,7 @@
 import { Point as MilPoint } from "@ngageoint/simple-features-js"
+import { GridUtils } from "../GridUtils";
+import { Pixel } from "../tile/Pixel";
+import { Bounds } from "./Bounds";
 import { Unit } from "./Unit";
 
 /**
@@ -95,7 +98,7 @@ export class Point extends MilPoint {
 	 * @return point in unit
 	 */
 	public static toUnitInverse(longitude: number, latitude: number, unit: Unit): Point {
-		return GridUtils.toUnit(longitude, latitude, unit);
+		return GridUtils.toUnitOpposite(longitude, latitude, unit);
 	}
 
 	/**
@@ -237,7 +240,7 @@ export class Point extends MilPoint {
 		if (this.isUnit(unit)) {
 			newPoint = this;
 		} else {
-			newPoint = GridUtils.toUnit(this.unit, this.getLongitude(), this.getLatitude(),
+			newPoint = GridUtils.toUnit(this.unit!, this.getLongitude(), this.getLatitude(),
 				unit);
 		}
 		return newPoint;
@@ -268,7 +271,7 @@ export class Point extends MilPoint {
 	 *            tile
 	 * @return pixel
 	 */
-	public getPixel(tile: GridTile): Pixel {
+	public getPixelFromTile(tile: GridTile): Pixel {
 		return this.getPixel(tile.getWidth(), tile.getHeight(), tile.getBounds());
 	}
 

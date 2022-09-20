@@ -1,6 +1,7 @@
 
 import { Line as MilLine, Point as MilPoint } from '@ngageoint/simple-features-js';
 import { List } from 'tstl';
+import { GridUtils } from '../GridUtils';
 import { Point } from './Point';
 import { Unit } from './Unit';
 
@@ -166,8 +167,8 @@ export class Line extends MilLine {
      *            line
      * @return intersection
      */
-    public intersection(line: Line): Point {
-        return GridUtils.intersection(this, line);
+    public intersection(line: Line): Point | undefined {
+        return GridUtils.lineIntersection(this, line);
     }
 
     /**
