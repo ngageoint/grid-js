@@ -3,6 +3,9 @@ import { Unit } from './Unit';
 import { List } from 'tstl';
 import { Point } from './Point';
 import { Line } from './Line';
+import { GridUtils } from '../GridUtils';
+import { GridTile } from '../tile/GridTile';
+import { PixelRange } from '../tile/PixelRange';
 
 /**
  * Grid Bounds
@@ -38,8 +41,9 @@ export class Bounds extends GeometryEnvelope {
 	 */
 	public static bounds(minLongitude: number, minLatitude: number,
 		maxLongitude: number, maxLatitude: number, unit: Unit): Bounds {
-		return new Bounds(minLongitude, minLatitude, maxLongitude, maxLatitude,
-			unit);
+		let bounds = new Bounds(minLongitude, minLatitude, maxLongitude, maxLatitude);
+		bounds.unit = unit;
+		return bounds;
 	}
 
 	/**
@@ -89,8 +93,19 @@ export class Bounds extends GeometryEnvelope {
 	 *            northeast corner
 	 * @return bounds
 	 */
-	public static bounds(southwest: Point, northeast: Point): Bounds {
-		return new Bounds(southwest, northeast);
+	public static boundsFromCorners(southwest: Point, northeast: Point): Bounds {
+		let bounds = new Bounds(southwest.getLongitude(), southwest.getLatitude(),
+			northeast.getLongitude(), northeast.getLatitude());
+
+		bounds.unit = southwest.getUnit();
+
+		if (!bounds.isUnit(northeast.getUnit()!)) {
+			throw new Error(
+				"Points are in different units. southwest: " + bounds.unit
+				+ ", northeast: " + northeast.getUnit());
+		}
+
+		return bounds;
 	}
 
 	/**
@@ -100,8 +115,8 @@ export class Bounds extends GeometryEnvelope {
 	 *            bounds to copy
 	 * @return bounds
 	 */
-	public static bounds(bounds: Bounds): Bounds {
-		return new Bounds(bounds);
+	public static boundsFromBounds(bounds: Bounds): Bounds {
+		return Bounds.boundsFromEnvelope(bounds as GeometryEnvelope, bounds.unit);
 	}
 
 	/**
@@ -113,89 +128,12 @@ export class Bounds extends GeometryEnvelope {
 	 *            unit
 	 * @return bounds
 	 */
-	public static bounds(envelope: GeometryEnvelope, unit: Unit): Bounds {
-		return new Bounds(envelope, unit);
+	public static boundsFromEnvelope(envelope: GeometryEnvelope, unit?: Unit): Bounds {
+		let bounds = new Bounds(envelope);
+		bounds.unit = unit;
+		return bounds;
 	}
 
-	/**
-	 * Constructor
-	 * 
-	 * @param minLongitude
-	 *            min longitude
-	 * @param minLatitude
-	 *            min latitude
-	 * @param maxLongitude
-	 *            max longitude
-	 * @param maxLatitude
-	 *            max latitude
-	 */
-	public Bounds(double minLongitude, double minLatitude, double maxLongitude,
-		double maxLatitude) {
-		this(minLongitude, minLatitude, maxLongitude, maxLatitude, Unit.DEGREE);
-	}
-
-	/**
-	 * Constructor
-	 * 
-	 * @param minLongitude
-	 *            min longitude
-	 * @param minLatitude
-	 *            min latitude
-	 * @param maxLongitude
-	 *            max longitude
-	 * @param maxLatitude
-	 *            max latitude
-	 * @param unit
-	 *            unit
-	 */
-	public Bounds(double minLongitude, double minLatitude, double maxLongitude,
-		double maxLatitude, Unit unit) {
-		super(minLongitude, minLatitude, maxLongitude, maxLatitude);
-		this.unit = unit;
-	}
-
-	/**
-	 * Constructor
-	 * 
-	 * @param southwest
-	 *            southwest corner
-	 * @param northeast
-	 *            northeast corner
-	 */
-	public Bounds(Point southwest, Point northeast) {
-		this(southwest.getLongitude(), southwest.getLatitude(),
-			northeast.getLongitude(), northeast.getLatitude(),
-			southwest.getUnit());
-
-		if (!isUnit(northeast.getUnit())) {
-			throw new IllegalArgumentException(
-				"Points are in different units. southwest: " + unit
-				+ ", northeast: " + northeast.getUnit());
-		}
-	}
-
-	/**
-	 * Copy constructor
-	 * 
-	 * @param bounds
-	 *            bounds to copy
-	 */
-	public Bounds(Bounds bounds) {
-		this(bounds, bounds.unit);
-	}
-
-	/**
-	 * Constructor
-	 * 
-	 * @param envelope
-	 *            geometry envelope
-	 * @param unit
-	 *            unit
-	 */
-	public Bounds(GeometryEnvelope envelope, Unit unit) {
-		super(envelope);
-		this.unit = unit;
-	}
 
 	/**
 	 * Get the min longitude
@@ -411,7 +349,7 @@ export class Bounds extends GeometryEnvelope {
 		} else {
 			const southwest = this.getSouthwest().toUnit(unit);
 			const northeast = this.getNortheast().toUnit(unit);
-			bounds = new Bounds(southwest, northeast);
+			bounds = Bounds.boundsFromCorners(southwest, northeast);
 		}
 		return bounds;
 	}
@@ -440,7 +378,8 @@ export class Bounds extends GeometryEnvelope {
 	 * @return centroid longitude
 	 */
 	public getCentroidLongitude(): number {
-		return this.getMidX();
+		//TODO need update from simple features
+		return (this.minX + this.maxX) / 2.0;
 	}
 
 	/**
@@ -453,7 +392,8 @@ export class Bounds extends GeometryEnvelope {
 		if (this.unit == Unit.DEGREE) {
 			centerLatitude = this.getCentroid().getLatitude();
 		} else {
-			centerLatitude = this.getMidY();
+			//TODO need update from simple features
+			centerLatitude = (this.minY + this.maxY) / 2.0;
 		}
 		return centerLatitude;
 	}
@@ -466,7 +406,7 @@ export class Bounds extends GeometryEnvelope {
 		if (this.unit == Unit.DEGREE) {
 			point = this.toMeters().getCentroid().toDegrees();
 		} else {
-			point = Point.point(super.centroid, this.unit);
+			point = Point.pointFromPoint(super.centroid, this.unit);
 		}
 		return point;
 	}
@@ -533,16 +473,20 @@ export class Bounds extends GeometryEnvelope {
 	 *            bounds
 	 * @return overlap bounds
 	 */
-	public overlap(bounds: Bounds): Bounds | undefined {
+	public overlap(bounds: GeometryEnvelope): GeometryEnvelope {
 
-		let unionOverlap: Bounds | undefined = undefined;
+		let unionOverlap: GeometryEnvelope | undefined = undefined;
 
-		let overlapEnvelope = super.overlap(bounds.toUnit(this.unit), true);
-		if (overlapEnvelope != null) {
-			unionOverlap = new Bounds(overlapEnvelope, this.unit);
+		if (bounds instanceof Bounds) {
+			let overlapEnvelope = super.overlap(bounds.toUnit(this.unit!) as GeometryEnvelope, true);
+			if (overlapEnvelope != null) {
+				unionOverlap = Bounds.boundsFromEnvelope(overlapEnvelope, this.unit);
+			}
+		} else {
+			unionOverlap = super.overlap(bounds);
 		}
 
-		return unionOverlap;
+		return unionOverlap!;
 	}
 
 	/**
@@ -552,16 +496,21 @@ export class Bounds extends GeometryEnvelope {
 	 *            bounds
 	 * @return union bounds
 	 */
-	public union(bounds: Bounds): Bounds | undefined {
+	public union(bounds: GeometryEnvelope): GeometryEnvelope {
 
-		let unionBounds: Bounds | undefined = undefined;
+		let unionBounds: GeometryEnvelope | undefined = undefined;
 
-		let unionEnvelope = super.union(bounds.toUnit(this.unit));
-		if (unionEnvelope != null) {
-			unionBounds = new Bounds(unionEnvelope, this.unit);
+		if(bounds instanceof Bounds) {
+			let unionEnvelope = super.union(bounds.toUnit(this.unit!) as GeometryEnvelope);
+			if (unionEnvelope != null) {
+				unionBounds = Bounds.boundsFromEnvelope(unionEnvelope, this.unit);
+			}
+		} else {
+			unionBounds = super.union(bounds);
 		}
+		
 
-		return unionBounds;
+		return unionBounds!;
 	}
 
 	/**
@@ -631,9 +580,9 @@ export class Bounds extends GeometryEnvelope {
 	 *            tile
 	 * @return pixel range
 	 */
-	public getPixelRange(tile: GridTile): PixelRange {
+	public getPixelRangeFromTile(tile: GridTile): PixelRange {
 		return this.getPixelRange(tile.getWidth(), tile.getHeight(),
-			tile.getBounds());
+			tile.getBounds()!);
 	}
 
 	/**
@@ -683,13 +632,13 @@ export class Bounds extends GeometryEnvelope {
 	 * @return bounds copy
 	 */
 	public copy(): Bounds {
-		return new Bounds(this);
+		return Bounds.boundsFromBounds(this);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public equals(other: Bounds): boolean {
+	public equals(other: GeometryEnvelope): boolean {
 		if (this == other)
 			return true;
 		if (!super.equals(other as GeometryEnvelope))
