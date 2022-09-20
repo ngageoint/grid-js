@@ -49,11 +49,13 @@
         "report": "nyc report",
         "coverage": "nyc npm run test:run",
         "coveralls": "nyc report --reporter=text-lcov | coveralls",
-        "build": "npm run clean && tsc"
+        "build:compile": "tsc -b lib",
+        "build": "npm-run-all clean build:compile"
     },
     "files": [
         "dist"
     ],
+    "main": "dist/index.js",
     "nyc": {
         "temp-dir": "./.test_run",
         "report-dir": "./docs/coverage",
