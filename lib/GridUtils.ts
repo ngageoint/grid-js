@@ -167,7 +167,7 @@ export class GridUtils {
         if (fromUnit == toUnit) {
             point = Point.point(longitude, latitude, toUnit);
         } else {
-            point = this.toUnit(longitude, latitude, toUnit);
+            point = this.toUnitOpposite(longitude, latitude, toUnit);
         }
         return point;
     }
