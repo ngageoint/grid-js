@@ -34,8 +34,9 @@ export class Point extends MilPoint {
    */
   public static point(longitude: number, latitude: number, unit?: Unit): Point {
     let point: Point;
-    if (unit) {
-      point = new Point(longitude, latitude, unit);
+    if (unit !== undefined) {
+      point = new Point(longitude, latitude);
+      point.unit = unit;
     } else {
       point = this.degrees(longitude, latitude);
     }
@@ -294,7 +295,9 @@ export class Point extends MilPoint {
    * @return point copy
    */
   public copy(): Point {
-    return new Point(this);
+    const copy = new Point(this);
+    copy.unit = this.unit;
+    return copy;
   }
 
   /**
