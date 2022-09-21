@@ -188,10 +188,10 @@ export class GridUtils {
         let point: MilPoint;
         switch (unit) {
             case Unit.DEGREE:
-                point = GeometryUtils.metersToDegrees(longitude, latitude);
+                point = GeometryUtils.metersToDegreesCoord(longitude, latitude);
                 break;
             case Unit.METER:
-                point = GeometryUtils.degreesToMeters(longitude, latitude);
+                point = GeometryUtils.degreesToMetersCoord(longitude, latitude);
                 break;
             default:
                 throw new Error("Unsupported unit: " + unit);
