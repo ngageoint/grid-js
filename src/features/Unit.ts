@@ -1,17 +1,16 @@
 /**
  * Unit
- * 
+ *
  * @author osbornb
  */
 export enum Unit {
+  /**
+   * Degrees
+   */
+  DEGREE,
 
-	/**
-	 * Degrees
-	 */
-	DEGREE,
-
-	/**
-	 * Meters
-	 */
-	METER,
+  /**
+   * Meters
+   */
+  METER,
 }

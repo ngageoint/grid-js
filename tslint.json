@@ -4,7 +4,7 @@
     "extends": ["tslint:recommended", "tslint-config-prettier"],
     "linterOptions": {
         "exclude": [
-            "test/*.ts"
+            "test/**/*.ts"
         ]
     },
     "rules": {
