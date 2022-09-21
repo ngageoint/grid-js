@@ -29,7 +29,7 @@
     "typings": "./index.d.ts",
     "dependencies": {
         "@ngageoint/color-js": "^1.0.0",
-        "@ngageoint/simple-features-js": "^1.0.2"
+        "@ngageoint/simple-features-js": "https://github.com/ngageoint/simple-features-js#develop"
     },
     "devDependencies": {
         "@types/chai": "^4.3.3",

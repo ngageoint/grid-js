@@ -1,6 +1,5 @@
 
 import { Line as MilLine, Point as MilPoint } from '@ngageoint/simple-features-js';
-import { List } from 'tstl';
 import { GridUtils } from '../GridUtils';
 import { Point } from './Point';
 import { Unit } from './Unit';
@@ -79,7 +78,7 @@ export class Line extends MilLine {
      *            second point
      */
     public setPoints(point1: Point, point2: Point): void {
-        const points = new List<MilPoint>();
+        const points: MilPoint[] = [];
         points.push(point1);
         points.push(point2);
         super.points = points;

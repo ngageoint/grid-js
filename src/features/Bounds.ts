@@ -1,6 +1,5 @@
 import { GeometryEnvelope } from '@ngageoint/simple-features-js';
 import { Unit } from './Unit';
-import { List } from 'tstl';
 import { Point } from './Point';
 import { Line } from './Line';
 import { GridUtils } from '../GridUtils';
@@ -610,14 +609,14 @@ export class Bounds extends GeometryEnvelope {
 	 * 
 	 * @return lines
 	 */
-	public getLines(): List<Line> {
+	public getLines(): Line[] {
 
 		const southwest = this.getSouthwest();
 		const northwest = this.getNorthwest();
 		const northeast = this.getNortheast();
 		const southeast = this.getSoutheast();
 
-		const lines = new List<Line>();
+		const lines: Line[] = [];
 		lines.push(Line.line(southwest, northwest));
 		lines.push(Line.line(northwest, northeast));
 		lines.push(Line.line(northeast, southeast));

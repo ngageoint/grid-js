@@ -1,4 +1,4 @@
-import { GeometryUtils, Point as MilPoint } from "@ngageoint/simple-features-js";
+import { GeometryConstants, GeometryUtils, Point as MilPoint } from "@ngageoint/simple-features-js";
 import { Bounds } from "./features/Bounds";
 import { Line } from "./features/Line";
 import { Point } from "./features/Point";
@@ -99,13 +99,13 @@ export class GridUtils {
         const tilesPerSide = this.tilesPerSide(zoom);
         const tileSize = this.tileSize(tilesPerSide);
 
-        const minLon = (-1 * GeometryUtils.WEB_MERCATOR_HALF_WORLD_WIDTH)
+        const minLon = (-1 * GeometryConstants.WEB_MERCATOR_HALF_WORLD_WIDTH)
             + (x * tileSize);
-        const minLat = GeometryUtils.WEB_MERCATOR_HALF_WORLD_WIDTH
+        const minLat = GeometryConstants.WEB_MERCATOR_HALF_WORLD_WIDTH
             - ((y + 1) * tileSize);
-        const maxLon = (-1 * GeometryUtils.WEB_MERCATOR_HALF_WORLD_WIDTH)
+        const maxLon = (-1 * GeometryConstants.WEB_MERCATOR_HALF_WORLD_WIDTH)
             + ((x + 1) * tileSize);
-        const maxLat = GeometryUtils.WEB_MERCATOR_HALF_WORLD_WIDTH
+        const maxLat = GeometryConstants.WEB_MERCATOR_HALF_WORLD_WIDTH
             - (y * tileSize);
 
         return Bounds.meters(minLon, minLat, maxLon, maxLat);
@@ -130,7 +130,7 @@ export class GridUtils {
      * @return tile size
      */
     public static tileSize(tilesPerSide: number): number {
-        return (2 * GeometryUtils.WEB_MERCATOR_HALF_WORLD_WIDTH) / tilesPerSide;
+        return (2 * GeometryConstants.WEB_MERCATOR_HALF_WORLD_WIDTH) / tilesPerSide;
     }
 
     /**
@@ -143,7 +143,7 @@ export class GridUtils {
     public static getZoomLevel(bounds: Bounds): number {
         bounds = bounds.toMeters();
         const tileSize = Math.min(bounds.getWidth(), bounds.getHeight());
-        const tilesPerSide = 2 * GeometryUtils.WEB_MERCATOR_HALF_WORLD_WIDTH
+        const tilesPerSide = 2 * GeometryConstants.WEB_MERCATOR_HALF_WORLD_WIDTH
             / tileSize;
         return Math.log(tilesPerSide) / Math.log(2);
     }
