@@ -81,7 +81,7 @@ export class Line extends MilLine {
         const points: MilPoint[] = [];
         points.push(point1);
         points.push(point2);
-        super.points = points;
+        this.points = points;
         this.validateUnits();
     }
 

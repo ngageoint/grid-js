@@ -1,5 +1,5 @@
-import { Point } from '../../dist/features/Point';
-import { Unit } from '../../dist/features/Unit';
+import { Point } from '../../src/features/Point';
+import { Unit } from '../../src/features/Unit';
 import { expect } from 'chai';
 
 describe('Point Tests', function () {

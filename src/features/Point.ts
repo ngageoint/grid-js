@@ -149,7 +149,7 @@ export class Point extends MilPoint {
 	 * @return longitude
 	 */
 	public getLongitude(): number {
-		return super.x;
+		return this.x;
 	}
 
 	/**
@@ -159,7 +159,7 @@ export class Point extends MilPoint {
 	 *            longitude
 	 */
 	public setLongitude(longitude: number): void {
-		super.x = longitude;
+		this.x = longitude;
 	}
 
 	/**
@@ -168,7 +168,7 @@ export class Point extends MilPoint {
 	 * @return latitude
 	 */
 	public getLatitude(): number {
-		return super.y;
+		return this.y;
 	}
 
 	/**
@@ -178,7 +178,7 @@ export class Point extends MilPoint {
 	 *            latitude
 	 */
 	public setLatitude(latitude: number): void {
-		super.y = latitude;
+		this.y = latitude;
 	}
 
 	/**

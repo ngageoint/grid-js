@@ -140,7 +140,7 @@ export class Bounds extends GeometryEnvelope {
 	 * @return min longitude
 	 */
 	public getMinLongitude(): number {
-		return super.minX;
+		return this.minX;
 	}
 
 	/**
@@ -150,7 +150,7 @@ export class Bounds extends GeometryEnvelope {
 	 *            min longitude
 	 */
 	public setMinLongitude(minLongitude: number): void {
-		super.minX = minLongitude;
+		this.minX = minLongitude;
 	}
 
 	/**
@@ -159,7 +159,7 @@ export class Bounds extends GeometryEnvelope {
 	 * @return min latitude
 	 */
 	public getMinLatitude(): number {
-		return super.minY;
+		return this.minY;
 	}
 
 	/**
@@ -169,7 +169,7 @@ export class Bounds extends GeometryEnvelope {
 	 *            min latitude
 	 */
 	public setMinLatitude(minLatitude: number): void {
-		super.minY = minLatitude;
+		this.minY = minLatitude;
 	}
 
 	/**
@@ -178,7 +178,7 @@ export class Bounds extends GeometryEnvelope {
 	 * @return max longitude
 	 */
 	public getMaxLongitude(): number {
-		return super.maxX;
+		return this.maxX;
 	}
 
 	/**
@@ -188,7 +188,7 @@ export class Bounds extends GeometryEnvelope {
 	 *            max longitude
 	 */
 	public setMaxLongitude(maxLongitude: number): void {
-		super.maxX = maxLongitude;
+		this.maxX = maxLongitude;
 	}
 
 	/**
@@ -197,7 +197,7 @@ export class Bounds extends GeometryEnvelope {
 	 * @return max latitude
 	 */
 	public getMaxLatitude(): number {
-		return super.maxY;;
+		return this.maxY;;
 	}
 
 	/**
@@ -207,7 +207,7 @@ export class Bounds extends GeometryEnvelope {
 	 *            max latitude
 	 */
 	public setMaxLatitude(maxLatitude: number): void {
-		super.maxY = maxLatitude;
+		this.maxY = maxLatitude;
 	}
 
 	/**
@@ -405,7 +405,7 @@ export class Bounds extends GeometryEnvelope {
 		if (this.unit == Unit.DEGREE) {
 			point = this.toMeters().getCentroid().toDegrees();
 		} else {
-			point = Point.pointFromPoint(super.centroid, this.unit);
+			point = Point.pointFromPoint(this.centroid, this.unit);
 		}
 		return point;
 	}
@@ -416,7 +416,7 @@ export class Bounds extends GeometryEnvelope {
 	 * @return width
 	 */
 	public getWidth(): number {
-		return super.xRange;
+		return this.xRange;
 	}
 
 	/**
@@ -425,7 +425,7 @@ export class Bounds extends GeometryEnvelope {
 	 * @return height
 	 */
 	public getHeight(): number {
-		return super.yRange;
+		return this.yRange;
 	}
 
 	/**

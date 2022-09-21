@@ -89,7 +89,8 @@ export class BaseZoomGrids<T extends BaseGrid> implements Iterable<T> {
     }
 
     [Symbol.iterator](): Iterator<T> {
-        return this.grids.begin();
+        //TODO verify iterator
+        return this.grids.keys();
     }
 
 }
