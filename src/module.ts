@@ -18,3 +18,4 @@ export * from './GridConstants';
 export * from './GridStyle';
 export * from './GridUtils';
 export * from './Labeler';
+export * from './Label';
