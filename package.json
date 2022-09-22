@@ -28,7 +28,7 @@
     "main": "index.ts",
     "dependencies": {
         "@ngageoint/color-js": "^2.0.1",
-        "@ngageoint/simple-features-js": "https://github.com/ngageoint/simple-features-js#develop"
+        "@ngageoint/simple-features-js": "1.1.1-beta.0"
     },
     "devDependencies": {
         "@types/chai": "^4.3.3",
