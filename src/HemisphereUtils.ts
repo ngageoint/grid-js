@@ -3,7 +3,7 @@ import { Hemisphere } from './Hemisphere';
 
 /**
  * Helper functions for Hemisphere
- * 
+ *
  * @since 1.0.0
  */
 export class HemisphereUtils {

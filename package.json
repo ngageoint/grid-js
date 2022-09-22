@@ -25,8 +25,7 @@
         "npm": ">= 8.x"
     },
     "license": "MIT",
-    "main": "./index.js",
-    "typings": "./index.d.ts",
+    "main": "index.ts",
     "dependencies": {
         "@ngageoint/color-js": "^2.0.1",
         "@ngageoint/simple-features-js": "https://github.com/ngageoint/simple-features-js#develop"
