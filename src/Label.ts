@@ -1,4 +1,5 @@
-import { Bounds, Point } from './module';
+import { Bounds } from "./features/Bounds";
+import { Point } from "./features/Point";
 
 /**
  * Grid Label

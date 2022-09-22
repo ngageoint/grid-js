@@ -1,4 +1,4 @@
-import { Color } from '@ngageoint/color-js/dist/Color';
+import { Color } from '@ngageoint/color-js';
 
 /**
  * Grid Line Style

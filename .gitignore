@@ -52,7 +52,7 @@ test/private
 test/fixtures/private
 **/*/tmp
 
-lib
+dist
 **/*/package-lock.json
 
 built
