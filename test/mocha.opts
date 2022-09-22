@@ -1,0 +1,4 @@
+--recursive
+--require chai
+--require source-map-support/register
+--full-trace
