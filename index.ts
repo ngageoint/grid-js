@@ -15,6 +15,7 @@ export * from './dist/tile/Pixel';
 export * from './dist/tile/PixelRange';
 
 export * from './dist/BaseGrid';
+export * from './dist/BaseGrids';
 export * from './dist/BaseZoomGrids';
 export * from './dist/GridConstants';
 export * from './dist/GridStyle';
