@@ -57,7 +57,7 @@ export abstract class GridProperties {
         let value: number | null = null;
         const stringValue = this.getProperty(this.buildProperty(properties), required);
         if (stringValue !== null) {
-            value = Number.parseInt(stringValue);
+            value = Number.parseInt(stringValue, 10);
         }
         return value;
     }
