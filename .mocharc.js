@@ -1,6 +1,6 @@
+'use strict';
+
 module.exports = {
-    spec: 'dist/**/*.js',
-    ignore: 'dist/node_modules/**',
-    import: [
-    ],
+    spec: ['dist/test/**/*.js'],
+    ignore: ['node_modules/**']
 };
