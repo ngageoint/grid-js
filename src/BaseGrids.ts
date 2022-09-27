@@ -1,5 +1,5 @@
 import { Color } from '@ngageoint/color-js';
-import TreeMap from 'ts-treemap';
+import { TreeMap } from 'tstl';
 import { BaseGrid } from './BaseGrid';
 import { BaseZoomGrids } from './BaseZoomGrids';
 import { GridConstants } from './GridConstants';
@@ -353,7 +353,7 @@ export abstract class BaseGrids<TGrid extends BaseGrid, TZoomGrids extends BaseZ
       const minZoom = grid.getMinZoom();
       let maxZoom = grid.getMaxZoom();
       if (!maxZoom) {
-        maxZoom = this.zoomGrids.lastKey();
+        maxZoom = this.zoomGrids.end().value.first;
       }
 
       for (let zoom = minZoom; zoom <= maxZoom!; zoom++) {
@@ -375,7 +375,7 @@ export abstract class BaseGrids<TGrid extends BaseGrid, TZoomGrids extends BaseZ
       const minZoom = grid.getMinZoom();
       let maxZoom = grid.getMaxZoom();
       if (!maxZoom) {
-        maxZoom = this.zoomGrids.lastKey();
+        maxZoom = this.zoomGrids.end().value.first;
       }
 
       for (let zoom = minZoom; zoom <= maxZoom!; zoom++) {
@@ -432,8 +432,8 @@ export abstract class BaseGrids<TGrid extends BaseGrid, TZoomGrids extends BaseZ
     }
 
     // All grids zoom range
-    const allGridsMin = this.zoomGrids.firstKey();
-    const allGridsMax = this.zoomGrids.lastKey();
+    const allGridsMin = this.zoomGrids.begin().value.first;
+    const allGridsMax = this.zoomGrids.end().value.first;
 
     // Existing grid zoom range
     const gridMinZoom = grid.getMinZoom();

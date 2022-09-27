@@ -1,3 +1,4 @@
+import { TreeSet } from 'tstl';
 import { BaseGrid } from './BaseGrid';
 
 /**
@@ -16,7 +17,7 @@ export class BaseZoomGrids<T extends BaseGrid> implements Iterable<T> {
   /**
    * Grids
    */
-  protected readonly grids: Set<T> = new Set();
+  protected readonly grids = new TreeSet<T>();
 
   /**
    * Constructor
@@ -42,7 +43,7 @@ export class BaseZoomGrids<T extends BaseGrid> implements Iterable<T> {
    *
    * @return grids
    */
-  public getGrids(): Set<T> {
+  public getGrids(): TreeSet<T> {
     return this.grids;
   }
 
@@ -52,7 +53,7 @@ export class BaseZoomGrids<T extends BaseGrid> implements Iterable<T> {
    * @return number of grids
    */
   public numGrids(): number {
-    return this.grids.size;
+    return this.grids.size();
   }
 
   /**
@@ -61,7 +62,7 @@ export class BaseZoomGrids<T extends BaseGrid> implements Iterable<T> {
    * @return true if has grids
    */
   public hasGrids(): boolean {
-    return this.grids.size > 0;
+    return !this.grids.empty();
   }
 
   /**
@@ -72,8 +73,7 @@ export class BaseZoomGrids<T extends BaseGrid> implements Iterable<T> {
    * @return true if added
    */
   public addGrid(grid: T): boolean {
-    this.grids.add(grid);
-    return this.grids.size > 0;
+    return this.grids.push(grid) > 0;
   }
 
   /**
@@ -84,10 +84,10 @@ export class BaseZoomGrids<T extends BaseGrid> implements Iterable<T> {
    * @return true if removed
    */
   public removeGrid(grid: T): boolean {
-    return this.grids.delete(grid);
+    return this.grids.erase(grid) > 0;
   }
 
   [Symbol.iterator](): Iterator<T> {
-    return this.grids.keys();
+    return this.grids.begin();
   }
 }
