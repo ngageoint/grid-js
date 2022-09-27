@@ -30,13 +30,14 @@ export abstract class GridProperties {
      *            true if required
      * @return value
      */
-    public getProperty(key: string, required = false): string | null {
+    public getProperty(required = false, key: string): string | undefined {
         if (!this.mProperties) {
             this.mProperties = this.initializeConfigurationProperties();
         }
-        let value: string | null = this.mProperties[key];
-        if (value !== null && value.trim().length === 0) {
-            value = null;
+
+        let value: string | undefined = this.mProperties[key];
+        if (value !== undefined && value.trim().length === 0) {
+            value = undefined;
         }
         if (!value && required) {
             throw new Error("Property not found: " + key);
@@ -47,16 +48,16 @@ export abstract class GridProperties {
     /**
      * Get an integer property by key
      *
-     * @param key
-     *            key
      * @param required
      *            true if required
+     * @param key
+     *            key
      * @return integer value
      */
-    public getIntegerProperty(required = false, ...properties: string[]): number | null {
-        let value: number | null = null;
-        const stringValue = this.getProperty(this.buildProperty(properties), required);
-        if (stringValue !== null) {
+    public getIntegerProperty(required = false, ...key: string[]): number | undefined {
+        let value: number | undefined;
+        const stringValue = this.getProperty(required, this.buildProperty(key));
+        if (stringValue) {
             value = Number.parseInt(stringValue, 10);
         }
         return value;
@@ -65,16 +66,16 @@ export abstract class GridProperties {
     /**
      * Get a float by key
      *
-     * @param key
-     *            key
      * @param required
      *            true if required
+     * @param key
+     *            key
      * @return float value
      */
-    public getFloatProperty(required = false, ...properties: string[]): number | null {
-		let value: number | null = null;
-		const stringValue = this.getProperty(this.buildProperty(properties), required);
-        if (stringValue != null) {
+    public getFloatProperty(required = false, ...key: string[]): number | undefined {
+		let value: number | undefined;
+		const stringValue = this.getProperty(required, this.buildProperty(key));
+        if (stringValue) {
             value = Number.parseFloat(stringValue);
         }
         return value;
@@ -83,16 +84,16 @@ export abstract class GridProperties {
     /**
      * Get a double by key
      *
-     * @param key
-     *            key
      * @param required
      *            true if required
+     * @param key
+     *            key
      * @return double value
      */
-    public getDoubleProperty(required = false, ...properties: string[]): number | null {
-		let value: number | null = null;
-		const stringValue = this.getProperty(this.buildProperty(properties), required);
-        if (stringValue != null) {
+    public getDoubleProperty(required = false, ...key: string[]): number | undefined {
+		let value: number | undefined;
+		const stringValue = this.getProperty(required, this.buildProperty(key));
+        if (stringValue) {
             value = +stringValue;
         }
         return value;
@@ -101,16 +102,16 @@ export abstract class GridProperties {
     /**
      * Get a boolean by key
      *
-     * @param key
-     *            key
      * @param required
      *            true if required
+     * @param key
+     *            key
      * @return boolean value
      */
-    public getBooleanProperty(required = false, ...properties: string[]): boolean | null {
-        let value: boolean | null = null;
-        const stringValue = this.getProperty(this.buildProperty(properties), required);
-        if (stringValue !== null) {
+    public getBooleanProperty(required = false, ...key: string[]): boolean | undefined {
+        let value: boolean | undefined;
+        const stringValue = this.getProperty(required, this.buildProperty(key));
+        if (stringValue) {
             value = stringValue.toLowerCase() === 'true';
         }
         return value;
@@ -143,7 +144,7 @@ export abstract class GridProperties {
     public buildProperty(properties: string[]): string {
         let combined = '';
         for (const property in properties) {
-            if (property != null) {
+            if (property) {
                 if (combined.length > 0) {
                     combined += PropertyConstants.PROPERTY_DIVIDER;
                 }
