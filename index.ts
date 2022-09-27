@@ -8,6 +8,7 @@ export * from './dist/features/Point'
 export * from './dist/features/Unit'
 
 export * from './dist/property/PropertyConstants'
+export * from  './dist/property/GridProperties'
 
 export * from './dist/tile/GridTile';
 export * from './dist/tile/Pixel';
