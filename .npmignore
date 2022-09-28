@@ -1,6 +1,5 @@
 .github/
 .vscode/
-build/
 docs/
 src/
 test/

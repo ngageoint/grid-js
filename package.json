@@ -55,7 +55,7 @@
         "build": "npm run compile",
         "report": "nyc report",
         "coverage": "nyc npm run test:run",
-        "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+        "format": "prettier --write \"lib/**/*.ts\" \"test/**/*.ts\"",
         "lint": "tslint -p tsconfig.json",
         "prebuild": "npm run clean",
         "pretest": "npm run build",
@@ -64,6 +64,9 @@
     "files": [
         "dist"
     ],
+    "directories": {
+        "lib": "src"
+    },
     "nyc": {
         "temp-dir": "./.test_run",
         "report-dir": "./docs/coverage",
