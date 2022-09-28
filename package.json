@@ -58,7 +58,7 @@
         "lint": "tslint -p tsconfig.json",
         "prebuild": "npm run clean",
         "pretest": "npm run build",
-        "prepublishOnly": "npm run build && npm run lint && ts-node build/dist"
+        "prepublishOnly": "npm run build && npm run lint"
     },
     "files": [
         "dist"
