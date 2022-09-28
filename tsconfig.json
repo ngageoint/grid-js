@@ -12,6 +12,7 @@
           "test"
       ],
       "include": [
-          "lib"
+          "lib",
+          "index.ts"
       ]
   }

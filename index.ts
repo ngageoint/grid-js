@@ -2,25 +2,25 @@
  * This allows for imports from @ngageoint/grid-js
  * @since 1.0.0
  */
-export * from './dist/features/Bounds'
-export * from './dist/features/Line'
-export * from './dist/features/Point'
-export * from './dist/features/Unit'
+export * from './lib/features/Bounds'
+export * from './lib/features/Line'
+export * from './lib/features/Point'
+export * from './lib/features/Unit'
 
-export * from './dist/property/PropertyConstants'
-export * from './dist/property/GridProperties'
+export * from './lib/property/PropertyConstants'
+export * from './lib/property/GridProperties'
 
-export * from './dist/tile/GridTile';
-export * from './dist/tile/Pixel';
-export * from './dist/tile/PixelRange';
+export * from './lib/tile/GridTile';
+export * from './lib/tile/Pixel';
+export * from './lib/tile/PixelRange';
 
-export * from './dist/BaseGrid';
-export * from './dist/BaseGrids';
-export * from './dist/BaseZoomGrids';
-export * from './dist/GridConstants';
-export * from './dist/GridStyle';
-export * from './dist/GridUtils';
-export * from './dist/Hemisphere';
-export * from './dist/HemisphereUtils';
-export * from './dist/Label';
-export * from './dist/Labeler';
+export * from './lib/BaseGrid';
+export * from './lib/BaseGrids';
+export * from './lib/BaseZoomGrids';
+export * from './lib/GridConstants';
+export * from './lib/GridStyle';
+export * from './/lib/GridUtils';
+export * from './lib/Hemisphere';
+export * from './lib/HemisphereUtils';
+export * from './lib/Label';
+export * from './lib/Labeler';
