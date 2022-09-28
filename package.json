@@ -65,7 +65,7 @@
         "dist"
     ],
     "directories": {
-        "lib": "src"
+        "lib": "./lib"
     },
     "nyc": {
         "temp-dir": "./.test_run",

@@ -4,5 +4,6 @@ module.exports = {
     extensions: ['ts', 'js'],
     ignore: ['node_modules'],
     recursive: true,
-    spec: ['dist/test']
+    require: ['ts-node/register'],
+    spec: ["test/**/*.spec.*"]
 };
