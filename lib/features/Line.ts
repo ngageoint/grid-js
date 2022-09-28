@@ -9,10 +9,6 @@ import { Unit } from './Unit';
  * @author osbornb
  */
 export class Line extends MilLine {
-  /**
-   * Serial Version UID
-   */
-  private static readonly serialVersionUID = 1;
 
   /**
    * Create a line

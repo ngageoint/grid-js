@@ -11,15 +11,11 @@ import { Unit } from './Unit';
  * @author osbornb
  */
 export class Point extends MilPoint {
-  /**
-   * Serial Version UID
-   */
-  private static readonly serialVersionUID = 1;
 
   /**
    * Unit
    */
-  private unit?: Unit = undefined;
+  private unit?: Unit = Unit.DEGREE;
 
   /**
    * Create a point

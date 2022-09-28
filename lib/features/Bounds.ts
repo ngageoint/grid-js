@@ -12,15 +12,11 @@ import { PixelRange } from '../tile/PixelRange';
  * @author osbornb
  */
 export class Bounds extends GeometryEnvelope {
-  /**
-   * Serial Version UID
-   */
-  private static readonly serialVersionUID = 1;
 
   /**
    * Unit
    */
-  private unit?: Unit = undefined;
+  private unit?: Unit = Unit.DEGREE;
 
   /**
    * Create bounds
