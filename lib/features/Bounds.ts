@@ -376,8 +376,7 @@ export class Bounds extends GeometryEnvelope {
    * @return centroid longitude
    */
   public getCentroidLongitude(): number {
-    // TODO need update from simple features
-    return (this.minX + this.maxX) / 2.0;
+    return super.getMidX();
   }
 
   /**
@@ -390,8 +389,7 @@ export class Bounds extends GeometryEnvelope {
     if (this.unit === Unit.DEGREE) {
       centerLatitude = this.getCentroid().getLatitude();
     } else {
-      //  TODO need update from simple features
-      centerLatitude = (this.minY + this.maxY) / 2.0;
+      centerLatitude = super.getMidY();
     }
     return centerLatitude;
   }

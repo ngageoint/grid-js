@@ -1,4 +1,3 @@
-import log from 'winston';
 import { KeyValueObject, propertiesToJson } from 'properties-file';
 import { PropertyConstants } from './PropertyConstants';
 
@@ -124,7 +123,6 @@ export abstract class GridProperties {
   private initializeConfigurationProperties(): KeyValueObject {
     const file = this.getFile();
 
-    log.debug('Reading properties from ' + file);
     // TODO check file property
     const properties = propertiesToJson(file);
 

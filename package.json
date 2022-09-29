@@ -31,8 +31,7 @@
         "@ngageoint/color-js": "^2.1.0",
         "@ngageoint/simple-features-js": "1.1.1-beta.0",
         "properties-file": "^2.1.6",
-        "tstl": "^2.5.8",
-        "winston": "^3.8.2"
+        "tstl": "^2.5.8"
     },
     "devDependencies": {
         "@tsconfig/recommended": "^1.0.1",
