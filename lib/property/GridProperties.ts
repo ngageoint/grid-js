@@ -34,7 +34,7 @@ export abstract class GridProperties {
     }
 
     let value: string | undefined = this.mProperties[key];
-    if (value !== undefined && value.trim().length === 0) {
+    if (value && value.trim().length === 0) {
       value = undefined;
     }
     if (!value && required) {
@@ -140,7 +140,7 @@ export abstract class GridProperties {
    */
   public buildProperty(properties: string[]): string {
     let combined = '';
-    for (const property in properties) {
+    for (const property of properties) {
       if (property) {
         if (combined.length > 0) {
           combined += PropertyConstants.PROPERTY_DIVIDER;
