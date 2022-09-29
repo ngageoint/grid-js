@@ -53,7 +53,6 @@ test/fixtures/private
 **/*/tmp
 
 dist
-test-dist
 **/*/package-lock.json
 
 built
