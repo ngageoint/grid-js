@@ -18,3 +18,4 @@ Grid is a Javascript library providing common geospatial reference system grid f
 ![Build & Test](https://github.com/ngageoint/grid-js/actions/workflows/build-test.yml/badge.svg)
 [![NPM](https://img.shields.io/npm/v/@ngageoint/grid-js.svg)](https://www.npmjs.com/package/@ngageoint/grid-js)
 [![Coverage Status](https://coveralls.io/repos/github/ngageoint/grid-js/badge.svg)](https://coveralls.io/github/ngageoint/grid-js)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
