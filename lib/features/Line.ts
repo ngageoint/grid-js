@@ -72,10 +72,8 @@ export class Line extends MilLine {
    *            second point
    */
   public setPoints(point1: Point, point2: Point): void {
-    const points: MilPoint[] = [];
-    points.push(point1);
-    points.push(point2);
-    this.points = points;
+    this.addPoint(point1);
+    this.addPoint(point2);
     this.validateUnits();
   }
 
