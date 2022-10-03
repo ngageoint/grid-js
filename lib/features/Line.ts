@@ -9,7 +9,6 @@ import { Unit } from './Unit';
  * @author osbornb
  */
 export class Line extends MilLine {
-
   /**
    * Create a line
    *

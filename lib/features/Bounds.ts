@@ -12,7 +12,6 @@ import { PixelRange } from '../tile/PixelRange';
  * @author osbornb
  */
 export class Bounds extends GeometryEnvelope {
-
   /**
    * Unit
    */

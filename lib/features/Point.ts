@@ -11,7 +11,6 @@ import { Unit } from './Unit';
  * @author osbornb
  */
 export class Point extends MilPoint {
-
   /**
    * Unit
    */
