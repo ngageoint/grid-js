@@ -1,6 +1,6 @@
 {
     "name": "@ngageoint/grid-js",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "displayName": "Grid Javascript",
     "description": "Grid Javascript",
     "keywords": [
@@ -58,7 +58,7 @@
         "lint:prettier": "prettier --check \"lib/**/*.ts\" \"test/**/*.ts\"",
         "lint:tslint": "tslint -p tsconfig.json",
         "lint": "npm run lint:tslint && npm run lint:prettier",
-        "fix:prettier": "npm lint:prettier --write",
+        "fix:prettier": "prettier --write \"lib/**/*.ts\" \"test/**/*.ts\"",
         "prebuild": "npm run clean",
         "pretest": "npm run build",
         "prepublishOnly": "npm run build && npm run lint"
