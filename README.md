@@ -18,3 +18,17 @@ Grid is a Javascript library providing common geospatial reference system grid f
 ![Build & Test](https://github.com/ngageoint/grid-js/actions/workflows/build-test.yml/badge.svg)
 [![NPM](https://img.shields.io/npm/v/@ngageoint/grid-js.svg)](https://www.npmjs.com/package/@ngageoint/grid-js)
 [![Coverage Status](https://coveralls.io/repos/github/ngageoint/grid-js/badge.svg)](https://coveralls.io/github/ngageoint/grid-js)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+
+#### Military Grid Reference System ####
+
+[MGRS](https://github.com/ngageoint/mgrs-js) is a Java library providing Military Grid Reference System functionality, a geocoordinate standard used by NATO militaries for locating points on Earth.
+
+#### Global Area Reference System ####
+
+[GARS](https://github.com/ngageoint/gars-js) is a Java library providing Global Area Reference System functionality, a standardized geospatial reference system for areas.
+
+### Remote Dependencies ###
+
+* [Simple Features](https://github.com/ngageoint/simple-features-js) (The MIT License (MIT)) - Simple Features Lib
+* [Color](https://github.com/ngageoint/color-js) (The MIT License (MIT)) - Color Lib
