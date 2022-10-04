@@ -8,7 +8,7 @@ import { BaseGrid } from './BaseGrid';
  * @param <T>
  *            grid type
  */
-export class BaseZoomGrids<T extends BaseGrid> implements Iterable<T> {
+export class BaseZoomGrids<T extends BaseGrid> implements IterableIterator<T> {
   /**
    * Zoom level
    */
@@ -19,6 +19,8 @@ export class BaseZoomGrids<T extends BaseGrid> implements Iterable<T> {
    */
   protected readonly grids = new TreeSet<T>();
 
+  private beginIterator: TreeSet.Iterator<T>;
+
   /**
    * Constructor
    *
@@ -27,6 +29,7 @@ export class BaseZoomGrids<T extends BaseGrid> implements Iterable<T> {
    */
   constructor(zoom: number) {
     this.zoom = zoom;
+    this.beginIterator = this.grids.begin();
   }
 
   /**
@@ -73,7 +76,9 @@ export class BaseZoomGrids<T extends BaseGrid> implements Iterable<T> {
    * @return true if added
    */
   public addGrid(grid: T): boolean {
-    return this.grids.push(grid) > 0;
+    const result = this.grids.push(grid) > 0;
+    this.reset();
+    return result;
   }
 
   /**
@@ -84,10 +89,32 @@ export class BaseZoomGrids<T extends BaseGrid> implements Iterable<T> {
    * @return true if removed
    */
   public removeGrid(grid: T): boolean {
-    return this.grids.erase(grid) > 0;
+    const result = this.grids.erase(grid) > 0;
+    this.reset();
+    return result;
   }
 
-  [Symbol.iterator](): Iterator<T> {
-    return this.grids.begin();
+  public next(): IteratorResult<T> {
+    if (!this.beginIterator.equals(this.grids.end())) {
+      const result = this.beginIterator.value;
+      this.beginIterator = this.beginIterator.next();
+      return {
+        done: false,
+        value: result,
+      };
+    } else {
+      return {
+        done: true,
+        value: undefined,
+      };
+    }
+  }
+
+  public reset(): void {
+    this.beginIterator = this.grids.begin();
+  }
+
+  [Symbol.iterator](): IterableIterator<T> {
+    return this;
   }
 }
