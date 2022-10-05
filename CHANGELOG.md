@@ -4,10 +4,14 @@ Adheres to [Semantic Versioning](http://semver.org/).
 
 ---
 
-## 1.1.0 (TBD)
+## 1.3.0 (TBD)
 
 * TBD
 
-## [1.0.0](https://github.com/ngageoint/grid-js/releases/tag/1.0.0) (09-29-2022)
+## 1.2.0 (https://github.com/ngageoint/grid-js/releases/tag/1.2.0) (10-4-2022)
+
+* Fixes an iterator problem with BaseZoomGrids
+
+## [1.1.0](https://github.com/ngageoint/grid-js/releases/tag/1.1.0) (09-29-2022)
 
 * Initial Release (port of grid-java 1.1.0)
