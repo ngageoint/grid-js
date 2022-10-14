@@ -1,23 +1,10 @@
-import { KeyValueObject, propertiesToJson } from 'properties-file';
 import { PropertyConstants } from './PropertyConstants';
+import config from '../../resources/grid.json';
 
 /**
  * Grid property loader
- *
- * @author osbornb
  */
-export abstract class GridProperties {
-  /**
-   * Properties
-   */
-  protected mProperties?: KeyValueObject;
-
-  /**
-   * Get the properties file name
-   *
-   * @return file name
-   */
-  public abstract getFile(): string;
+export class GridProperties {
 
   /**
    * Get a property by key
@@ -29,11 +16,8 @@ export abstract class GridProperties {
    * @return value
    */
   public getProperty(required = false, key: string): string | undefined {
-    if (!this.mProperties) {
-      this.mProperties = this.initializeConfigurationProperties();
-    }
-
-    let value: string | undefined = this.mProperties[key];
+   
+    let value: string | undefined = (<any>config)[key];
     if (value && value.trim().length === 0) {
       value = undefined;
     }
@@ -113,20 +97,6 @@ export abstract class GridProperties {
       value = stringValue.toLowerCase() === 'true';
     }
     return value;
-  }
-
-  /**
-   * Initialize the configuration properties
-   *
-   * @return properties
-   */
-  private initializeConfigurationProperties(): KeyValueObject {
-    const file = this.getFile();
-
-    // TODO check file property
-    const properties = propertiesToJson(file);
-
-    return properties;
   }
 
   /**

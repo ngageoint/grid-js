@@ -30,7 +30,6 @@
     "dependencies": {
         "@ngageoint/color-js": "^2.1.0",
         "@ngageoint/simple-features-js": "1.1.0",
-        "properties-file": "^2.1.6",
         "tstl": "^2.5.8"
     },
     "devDependencies": {
