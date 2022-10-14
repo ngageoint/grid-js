@@ -5,7 +5,6 @@ import config from '../../resources/grid.json';
  * Grid property loader
  */
 export class GridProperties {
-
   /**
    * Get a property by key
    *
@@ -16,8 +15,7 @@ export class GridProperties {
    * @return value
    */
   public getProperty(required = false, key: string): string | undefined {
-   
-    let value: string | undefined = (<any>config)[key];
+    let value: string | undefined = (config as any)[key];
     if (value && value.trim().length === 0) {
       value = undefined;
     }
