@@ -1,11 +1,17 @@
 import _ from 'lodash';
 import { PropertyConstants } from './PropertyConstants';
-import * as config from '../../resources/grid.json';
+import * as gridConfig from '../../resources/grid.json';
 
 /**
  * Grid property loader
  */
-export class GridProperties {
+export abstract class GridProperties {
+  private readonly extraConfig: any;
+
+  constructor(config: any) {
+    this.extraConfig = config;
+  }
+
   /**
    * Get a property by key
    *
@@ -16,7 +22,12 @@ export class GridProperties {
    * @return value
    */
   public getProperty(required = false, key: string): string | undefined {
-    let value: string | undefined = _.get(config, key);
+    let value: string | undefined = _.get(this.extraConfig, key);
+
+    if (!value) {
+      value = _.get(gridConfig, key);
+    }
+
     if (value) {
       value = value.toString();
       if (value.trim().length === 0) {
