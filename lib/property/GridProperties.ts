@@ -1,4 +1,4 @@
-import _ from "lodash";
+import _ from 'lodash';
 import { PropertyConstants } from './PropertyConstants';
 import * as config from '../../resources/grid.json';
 
