@@ -1,7 +1,8 @@
 .github/
 .vscode/
 docs/
-src/
+lib/
+resources/
 test/
 
 *.js.map
