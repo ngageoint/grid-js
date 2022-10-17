@@ -1,5 +1,6 @@
+import _ from "lodash";
 import { PropertyConstants } from './PropertyConstants';
-import config from '../../resources/grid.json';
+import * as config from '../../resources/grid.json';
 
 /**
  * Grid property loader
@@ -15,9 +16,12 @@ export class GridProperties {
    * @return value
    */
   public getProperty(required = false, key: string): string | undefined {
-    let value: string | undefined = (config as any)[key];
-    if (value && value.trim().length === 0) {
-      value = undefined;
+    let value: string | undefined = _.get(config, key);
+    if (value) {
+      value = value.toString();
+      if (value.trim().length === 0) {
+        value = undefined;
+      }
     }
     if (!value && required) {
       throw new Error('Property not found: ' + key);
