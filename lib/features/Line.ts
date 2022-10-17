@@ -71,8 +71,7 @@ export class Line extends MilLine {
    *            second point
    */
   public setPoints(point1: Point, point2: Point): void {
-    this.addPoint(point1);
-    this.addPoint(point2);
+    this.points = [point1, point2];
     this.validateUnits();
   }
 
