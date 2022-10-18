@@ -19,17 +19,17 @@ export class BaseGrid {
   /**
    * Maximum zoom level
    */
-  private maxZoom?: number = undefined;
+  private maxZoom?: number;
 
   /**
    * Minimum zoom level override for drawing grid lines
    */
-  private linesMinZoom?: number = undefined;
+  private linesMinZoom?: number;
 
   /**
    * Maximum zoom level override for drawing grid lines
    */
-  private linesMaxZoom?: number = undefined;
+  private linesMaxZoom?: number;
 
   /**
    * Grid line style
@@ -39,7 +39,7 @@ export class BaseGrid {
   /**
    * Grid labeler
    */
-  private labeler?: Labeler = undefined;
+  private labeler?: Labeler;
 
   /**
    * Is the grid enabled
@@ -133,7 +133,7 @@ export class BaseGrid {
    * @return true if has a minimum, false if not overridden
    */
   public hasLinesMinZoom(): boolean {
-    return this.linesMinZoom != null;
+    return this.linesMinZoom !== undefined;
   }
 
   /**
@@ -182,7 +182,14 @@ export class BaseGrid {
    * @return true if within range
    */
   public isLinesWithin(zoom: number): boolean {
-    return (!this.linesMinZoom || zoom >= this.linesMinZoom) && (!this.linesMaxZoom || zoom <= this.linesMaxZoom);
+    let isWithin = false;
+    if (this.linesMinZoom !== null && this.linesMinZoom !== undefined) {
+      isWithin = zoom >= this.linesMinZoom!;
+    }
+    if (isWithin && this.linesMaxZoom !== null && this.linesMaxZoom !== undefined) {
+      isWithin = zoom <= this.linesMaxZoom;
+    }
+    return isWithin;
   }
 
   /**
@@ -190,7 +197,7 @@ export class BaseGrid {
    *
    * @return grid line style
    */
-  public getStyle(): GridStyle | undefined {
+  public getStyle(): GridStyle {
     return this.style;
   }
 
@@ -210,11 +217,7 @@ export class BaseGrid {
    * @return grid line color
    */
   public getColor(): Color | undefined {
-    let color: Color | undefined;
-    if (this.getStyle()) {
-      color = this.getStyle()!.getColor();
-    }
-    return color;
+    return this.getStyle().getColor();
   }
 
   /**
@@ -224,9 +227,7 @@ export class BaseGrid {
    *            grid line color
    */
   public setColor(color?: Color): void {
-    if (this.getStyle()) {
-      this.getStyle()!.setColor(color);
-    }
+    this.getStyle().setColor(color);
   }
 
   /**
@@ -235,11 +236,7 @@ export class BaseGrid {
    * @return grid line width
    */
   public getWidth(): number {
-    let width = 0;
-    if (this.getStyle()) {
-      width = this.getStyle()!.getWidth();
-    }
-    return width;
+    return this.getStyle().getWidth();
   }
 
   /**
@@ -249,9 +246,7 @@ export class BaseGrid {
    *            grid line width
    */
   public setWidth(width: number): void {
-    if (this.getStyle()) {
-      this.getStyle()!.setWidth(width);
-    }
+    this.getStyle().setWidth(width);
   }
 
   /**
@@ -278,7 +273,7 @@ export class BaseGrid {
    * @param labeler
    *            grid labeler
    */
-  public setLabeler(labeler: Labeler): void {
+  public setLabeler(labeler?: Labeler): void {
     this.labeler = labeler;
   }
 
