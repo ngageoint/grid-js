@@ -182,7 +182,7 @@ export class BaseGrid {
    * @return true if within range
    */
   public isLinesWithin(zoom: number): boolean {
-    let isWithin = false;
+    let isWithin = true;
     if (this.linesMinZoom !== null && this.linesMinZoom !== undefined) {
       isWithin = zoom >= this.linesMinZoom!;
     }

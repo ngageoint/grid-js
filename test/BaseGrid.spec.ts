@@ -19,6 +19,8 @@ describe('BaseGrid Tests', function () {
     expect(baseGrid.isWithin(baseGrid.getMaxZoom()!)).to.be.true;
     expect(baseGrid.isWithin(baseGrid.getMaxZoom()! + 1)).to.be.false;
 
+    expect(baseGrid.isLinesWithin(0)).to.be.true;
+
     baseGrid.setLinesMinZoom(0);
     expect(baseGrid.isLinesWithin(baseGrid.getLinesMinZoom())).to.be.true;
     expect(baseGrid.isLinesWithin(baseGrid.getLinesMinZoom() - 1)).to.be.false;
