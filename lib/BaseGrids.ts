@@ -266,7 +266,7 @@ export abstract class BaseGrids<TGrid extends BaseGrid, TZoomGrids extends BaseZ
       color = grid.getColor();
     }
 
-    if (!width) {
+    if (width === null || width === undefined) {
       width = grid.getWidth();
     }
 
