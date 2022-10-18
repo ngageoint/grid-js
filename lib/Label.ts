@@ -3,8 +3,6 @@ import { Point } from './features/Point';
 
 /**
  * Grid Label
- *
- * @author osbornb
  */
 export class Label {
   /**

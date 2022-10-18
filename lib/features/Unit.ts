@@ -1,7 +1,5 @@
 /**
  * Unit
- *
- * @author osbornb
  */
 export enum Unit {
   /**

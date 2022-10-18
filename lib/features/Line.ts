@@ -5,8 +5,6 @@ import { Unit } from './Unit';
 
 /**
  * Line between two points
- *
- * @author osbornb
  */
 export class Line extends MilLine {
   /**

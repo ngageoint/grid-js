@@ -1,7 +1,5 @@
 /**
  * Hemisphere enumeration
- *
- * @author osbornb
  */
 export enum Hemisphere {
   /**
