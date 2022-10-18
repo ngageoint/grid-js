@@ -4,7 +4,6 @@ import { BaseGrid } from './BaseGrid';
 /**
  * Zoom Level Matching Grids
  *
- * @author osbornb
  * @param <T>
  *            grid type
  */

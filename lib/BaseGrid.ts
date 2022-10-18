@@ -4,8 +4,6 @@ import { Labeler } from './Labeler';
 
 /**
  * Base Grid
- *
- * @author osbornb
  */
 export class BaseGrid {
   /**

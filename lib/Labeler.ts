@@ -2,8 +2,6 @@ import { Color } from '@ngageoint/color-js/';
 
 /**
  * Grid Labeler
- *
- * @author osbornb
  */
 export abstract class Labeler {
   /**
@@ -122,7 +120,7 @@ export abstract class Labeler {
    * @return true if has a maximum, false if unbounded
    */
   public hasMaxZoom(): boolean {
-    return this.maxZoom != null;
+    return this.maxZoom !== null && this.maxZoom !== undefined;
   }
 
   /**
@@ -143,7 +141,7 @@ export abstract class Labeler {
    * @return true if within range
    */
   public isWithin(zoom: number): boolean {
-    return zoom >= this.minZoom && (this.maxZoom === undefined || zoom <= this.maxZoom);
+    return zoom >= this.minZoom && (this.maxZoom === undefined || this.maxZoom === null || zoom <= this.maxZoom);
   }
 
   /**

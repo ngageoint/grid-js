@@ -11,7 +11,6 @@ import { PropertyConstants } from './property/PropertyConstants';
 /**
  * Grids
  *
- * @author osbornb
  * @param <TGrid>
  *            grid type
  * @param <TZoomGrids>
@@ -76,7 +75,7 @@ export abstract class BaseGrids<TGrid extends BaseGrid, TZoomGrids extends BaseZ
   protected loadGrid(grid: TGrid, gridKey: string, labeler: Labeler, enabled?: boolean): void {
     if (enabled === null || enabled === undefined) {
       enabled = this.properties.getBooleanProperty(false, PropertyConstants.GRIDS, gridKey, PropertyConstants.ENABLED);
-      if (enabled == null) {
+      if (enabled === undefined) {
         enabled = true;
       }
     }
@@ -88,7 +87,7 @@ export abstract class BaseGrids<TGrid extends BaseGrid, TZoomGrids extends BaseZ
       gridKey,
       PropertyConstants.MIN_ZOOM,
     );
-    if (!minZoom) {
+    if (minZoom === undefined) {
       minZoom = 0;
     }
     grid.setMinZoom(minZoom);
@@ -127,7 +126,7 @@ export abstract class BaseGrids<TGrid extends BaseGrid, TZoomGrids extends BaseZ
     grid.setColor(color);
 
     let width = this.properties.getDoubleProperty(false, PropertyConstants.GRIDS, gridKey, PropertyConstants.WIDTH);
-    if (!width) {
+    if (width === undefined) {
       width = this.getDefaultWidth();
     }
     grid.setWidth(width);
@@ -163,7 +162,7 @@ export abstract class BaseGrids<TGrid extends BaseGrid, TZoomGrids extends BaseZ
       PropertyConstants.LABELER,
       PropertyConstants.MIN_ZOOM,
     );
-    if (minZoom) {
+    if (minZoom !== undefined) {
       labeler.setMinZoom(minZoom);
     }
 
@@ -174,7 +173,7 @@ export abstract class BaseGrids<TGrid extends BaseGrid, TZoomGrids extends BaseZ
       PropertyConstants.LABELER,
       PropertyConstants.MAX_ZOOM,
     );
-    if (maxZoom) {
+    if (maxZoom !== undefined) {
       labeler.setMaxZoom(maxZoom);
     }
 
@@ -198,7 +197,7 @@ export abstract class BaseGrids<TGrid extends BaseGrid, TZoomGrids extends BaseZ
       PropertyConstants.LABELER,
       PropertyConstants.TEXT_SIZE,
     );
-    if (textSize) {
+    if (textSize !== undefined) {
       labeler.setTextSize(textSize);
     }
 
@@ -209,7 +208,7 @@ export abstract class BaseGrids<TGrid extends BaseGrid, TZoomGrids extends BaseZ
       PropertyConstants.LABELER,
       PropertyConstants.BUFFER,
     );
-    if (buffer) {
+    if (buffer !== undefined) {
       labeler.setBuffer(buffer);
     }
   }
@@ -267,7 +266,7 @@ export abstract class BaseGrids<TGrid extends BaseGrid, TZoomGrids extends BaseZ
       color = grid.getColor();
     }
 
-    if (width === null || width === undefined || width === 0) {
+    if (!width) {
       width = grid.getWidth();
     }
 
@@ -352,7 +351,7 @@ export abstract class BaseGrids<TGrid extends BaseGrid, TZoomGrids extends BaseZ
 
       const minZoom = grid.getMinZoom();
       let maxZoom = grid.getMaxZoom();
-      if (!maxZoom) {
+      if (maxZoom === null || maxZoom === undefined) {
         maxZoom = this.zoomGrids.end().value.first;
       }
 
@@ -374,7 +373,7 @@ export abstract class BaseGrids<TGrid extends BaseGrid, TZoomGrids extends BaseZ
 
       const minZoom = grid.getMinZoom();
       let maxZoom = grid.getMaxZoom();
-      if (!maxZoom) {
+      if (maxZoom === null || maxZoom === undefined) {
         maxZoom = this.zoomGrids.end().value.first;
       }
 
@@ -394,7 +393,7 @@ export abstract class BaseGrids<TGrid extends BaseGrid, TZoomGrids extends BaseZ
    */
   public setMinZoom(grid: TGrid, minZoom: number): void {
     let maxZoom = grid.getMaxZoom();
-    if (maxZoom && maxZoom < minZoom) {
+    if (maxZoom !== null && maxZoom !== undefined && maxZoom < minZoom) {
       maxZoom = minZoom;
     }
     this.setZoomRange(grid, minZoom, maxZoom);
@@ -410,7 +409,7 @@ export abstract class BaseGrids<TGrid extends BaseGrid, TZoomGrids extends BaseZ
    */
   public setMaxZoom(grid: TGrid, maxZoom?: number): void {
     let minZoom = grid.getMinZoom();
-    if (maxZoom && minZoom > maxZoom) {
+    if (maxZoom !== null && maxZoom !== undefined && minZoom > maxZoom) {
       minZoom = maxZoom;
     }
     this.setZoomRange(grid, minZoom, maxZoom);
@@ -427,7 +426,7 @@ export abstract class BaseGrids<TGrid extends BaseGrid, TZoomGrids extends BaseZ
    *            maximum zoom
    */
   public setZoomRange(grid: TGrid, minZoom: number, maxZoom?: number): void {
-    if (maxZoom && maxZoom < minZoom) {
+    if (maxZoom !== null && maxZoom !== undefined && maxZoom < minZoom) {
       throw new Error("Min zoom '" + minZoom + "' can not be larger than max zoom '" + maxZoom + "'");
     }
 
@@ -438,7 +437,7 @@ export abstract class BaseGrids<TGrid extends BaseGrid, TZoomGrids extends BaseZ
     // Existing grid zoom range
     const gridMinZoom = grid.getMinZoom();
     let gridMaxZoom = grid.getMaxZoom();
-    if (!gridMaxZoom) {
+    if (gridMaxZoom === null || gridMaxZoom === undefined) {
       gridMaxZoom = allGridsMax;
     } else {
       gridMaxZoom = Math.min(gridMaxZoom, allGridsMax!);
@@ -448,7 +447,7 @@ export abstract class BaseGrids<TGrid extends BaseGrid, TZoomGrids extends BaseZ
     grid.setMaxZoom(maxZoom);
 
     minZoom = Math.max(minZoom, allGridsMin!);
-    if (!maxZoom) {
+    if (maxZoom === null || maxZoom === undefined) {
       maxZoom = allGridsMax;
     } else {
       maxZoom = Math.min(maxZoom, allGridsMax!);
