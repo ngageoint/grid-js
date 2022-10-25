@@ -1,0 +1,12 @@
+{
+    "grid": {
+        "width": 2.0
+    },
+    "grids": {
+        "propagate": true
+    },
+    "labeler": {
+        "text_size": 24.0,
+        "buffer": 0.05
+    }
+}

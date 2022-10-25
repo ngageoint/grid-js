@@ -1,6 +1,6 @@
 {
     "name": "@ngageoint/grid-js",
-    "version": "1.2.0",
+    "version": "2.0.0",
     "displayName": "Grid Javascript",
     "description": "Grid Javascript",
     "keywords": [
@@ -30,7 +30,8 @@
     "dependencies": {
         "@ngageoint/color-js": "^2.1.0",
         "@ngageoint/simple-features-js": "1.1.0",
-        "properties-file": "^2.1.6",
+        "@types/lodash": "^4.14.186",
+        "lodash": "^4.17.21",
         "tstl": "^2.5.8"
     },
     "devDependencies": {

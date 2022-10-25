@@ -1,7 +1,5 @@
 /**
  * Tile Pixel
- *
- * @author osbornb
  */
 export class Pixel {
   /**

@@ -6,8 +6,6 @@ import { Pixel } from './Pixel';
 
 /**
  * Grid Tile
- *
- * @author osbornb
  */
 export class GridTile {
   /**
@@ -110,7 +108,7 @@ export class GridTile {
    */
   public getBounds(unit?: Unit): Bounds | undefined {
     let tmpBounds = this.bounds;
-    if (unit && this.bounds) {
+    if (unit !== null && unit !== undefined && this.bounds) {
       tmpBounds = this.bounds!.toUnit(unit);
     }
     return tmpBounds;

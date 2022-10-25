@@ -1,7 +1,5 @@
 /**
  * Grid Constants
- *
- * @author osbornb
  */
 export class GridConstants {
   /**
