@@ -8,8 +8,6 @@ import { PixelRange } from '../tile/PixelRange';
 
 /**
  * Grid Bounds
- *
- * @author osbornb
  */
 export class Bounds extends GeometryEnvelope {
   /**
@@ -473,7 +471,7 @@ export class Bounds extends GeometryEnvelope {
 
     if (bounds instanceof Bounds) {
       const overlapEnvelope = super.overlap(bounds.toUnit(this.unit!) as GeometryEnvelope, true);
-      if (overlapEnvelope !== null) {
+      if (overlapEnvelope !== null && overlapEnvelope !== undefined) {
         unionOverlap = Bounds.boundsFromEnvelope(overlapEnvelope, this.unit);
       }
     } else {
@@ -495,7 +493,7 @@ export class Bounds extends GeometryEnvelope {
 
     if (bounds instanceof Bounds) {
       const unionEnvelope = super.union(bounds.toUnit(this.unit!) as GeometryEnvelope);
-      if (unionEnvelope !== null) {
+      if (unionEnvelope !== null && unionEnvelope !== undefined) {
         unionBounds = Bounds.boundsFromEnvelope(unionEnvelope, this.unit);
       }
     } else {

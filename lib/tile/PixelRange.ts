@@ -2,8 +2,6 @@ import { Pixel } from './Pixel';
 
 /**
  * Pixel Range
- *
- * @author osbornb
  */
 export class PixelRange {
   /**

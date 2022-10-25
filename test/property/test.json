@@ -1,0 +1,12 @@
+{
+    "test0": {
+        "width": 2.0
+    },
+    "test1": {
+        "propagate": true
+    },
+    "test2": {
+        "text_size": 24.0,
+        "buffer": 0.05
+    }
+}

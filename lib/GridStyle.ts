@@ -2,8 +2,6 @@ import { Color } from '@ngageoint/color-js';
 
 /**
  * Grid Line Style
- *
- * @author osbornb
  */
 export class GridStyle {
   /**

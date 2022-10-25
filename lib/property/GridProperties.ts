@@ -1,23 +1,16 @@
-import { KeyValueObject, propertiesToJson } from 'properties-file';
+import _ from 'lodash';
 import { PropertyConstants } from './PropertyConstants';
+import * as gridConfig from '../../resources/grid.json';
 
 /**
  * Grid property loader
- *
- * @author osbornb
  */
 export abstract class GridProperties {
-  /**
-   * Properties
-   */
-  protected mProperties?: KeyValueObject;
+  private readonly extraConfig: any;
 
-  /**
-   * Get the properties file name
-   *
-   * @return file name
-   */
-  public abstract getFile(): string;
+  constructor(config: any) {
+    this.extraConfig = config;
+  }
 
   /**
    * Get a property by key
@@ -29,13 +22,17 @@ export abstract class GridProperties {
    * @return value
    */
   public getProperty(required = false, key: string): string | undefined {
-    if (!this.mProperties) {
-      this.mProperties = this.initializeConfigurationProperties();
+    let value: string | undefined = _.get(this.extraConfig, key);
+
+    if (!value) {
+      value = _.get(gridConfig, key);
     }
 
-    let value: string | undefined = this.mProperties[key];
-    if (value && value.trim().length === 0) {
-      value = undefined;
+    if (value) {
+      value = value.toString();
+      if (value.trim().length === 0) {
+        value = undefined;
+      }
     }
     if (!value && required) {
       throw new Error('Property not found: ' + key);
@@ -113,20 +110,6 @@ export abstract class GridProperties {
       value = stringValue.toLowerCase() === 'true';
     }
     return value;
-  }
-
-  /**
-   * Initialize the configuration properties
-   *
-   * @return properties
-   */
-  private initializeConfigurationProperties(): KeyValueObject {
-    const file = this.getFile();
-
-    // TODO check file property
-    const properties = propertiesToJson(file);
-
-    return properties;
   }
 
   /**

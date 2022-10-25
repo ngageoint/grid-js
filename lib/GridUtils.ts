@@ -8,8 +8,6 @@ import { Pixel } from './tile/Pixel';
 
 /**
  * Grid utilities
- *
- * @author osbornb
  */
 export class GridUtils {
   /**
@@ -273,7 +271,7 @@ export class GridUtils {
       line2Point2.toMeters(),
     );
 
-    if (point != null) {
+    if (point !== null && point !== undefined) {
       intersection = Point.pointFromPoint(point, Unit.METER).toUnit(line1Point1.getUnit()!);
     }
 

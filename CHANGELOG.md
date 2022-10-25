@@ -4,9 +4,10 @@ Adheres to [Semantic Versioning](http://semver.org/).
 
 ---
 
-## 1.3.0 (TBD)
+## 2.0.0 (TBD)
 
-* TBD
+* Using JSON files in lieu of properties files.
+* Fixing bug in Line with setPoints 
 
 ## 1.2.0 (https://github.com/ngageoint/grid-js/releases/tag/1.2.0) (10-4-2022)
 
