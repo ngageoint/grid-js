@@ -466,19 +466,11 @@ export class Bounds extends GeometryEnvelope {
    *            bounds
    * @return overlap bounds
    */
-  public overlap(bounds: GeometryEnvelope): GeometryEnvelope {
-    let unionOverlap: GeometryEnvelope | undefined;
+  public overlap(bounds: Bounds): GeometryEnvelope {
+    const overlapEnvelope = super.overlap(bounds.toUnit(this.unit!) as GeometryEnvelope, true);
+    const unionOverlap = Bounds.boundsFromEnvelope(overlapEnvelope, this.unit);
 
-    if (bounds instanceof Bounds) {
-      const overlapEnvelope = super.overlap(bounds.toUnit(this.unit!) as GeometryEnvelope, true);
-      if (overlapEnvelope !== null && overlapEnvelope !== undefined) {
-        unionOverlap = Bounds.boundsFromEnvelope(overlapEnvelope, this.unit);
-      }
-    } else {
-      unionOverlap = super.overlap(bounds);
-    }
-
-    return unionOverlap!;
+    return unionOverlap;
   }
 
   /**
@@ -488,19 +480,11 @@ export class Bounds extends GeometryEnvelope {
    *            bounds
    * @return union bounds
    */
-  public union(bounds: GeometryEnvelope): GeometryEnvelope {
-    let unionBounds: GeometryEnvelope | undefined;
+  public union(bounds: Bounds): GeometryEnvelope {
+    const unionEnvelope = super.union(bounds.toUnit(this.unit!) as GeometryEnvelope);
+    const unionBounds = Bounds.boundsFromEnvelope(unionEnvelope, this.unit);
 
-    if (bounds instanceof Bounds) {
-      const unionEnvelope = super.union(bounds.toUnit(this.unit!) as GeometryEnvelope);
-      if (unionEnvelope !== null && unionEnvelope !== undefined) {
-        unionBounds = Bounds.boundsFromEnvelope(unionEnvelope, this.unit);
-      }
-    } else {
-      unionBounds = super.union(bounds);
-    }
-
-    return unionBounds!;
+    return unionBounds;
   }
 
   /**
